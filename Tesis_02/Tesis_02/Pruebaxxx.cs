@@ -7,8 +7,6 @@ namespace Tesis_02
 {
     class Pruebaxxx
     {
-        //GODOY GAY :V
-        //LEL VIERNES SOMOS FACU B| asda
-        //asdasdag
+        
     }
 }
