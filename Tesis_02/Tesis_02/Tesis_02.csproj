@@ -72,6 +72,13 @@
     <Reference Include="System.Net" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\Animacion.cs" />
+    <Compile Include="Core\CuadroAnimacion.cs" />
+    <Compile Include="Core\DespiertoPantalla.cs" />
+    <Compile Include="Core\iSpriteFactory.cs" />
+    <Compile Include="Core\ListaInteligente.cs" />
+    <Compile Include="Core\Sprite.cs" />
+    <Compile Include="Core\TileMap.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Game1.cs" />
@@ -85,8 +92,9 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Tesis_02Content\Tesis_02Content.contentproj">
-      <Name>Tesis_02Content</Name>
+      <Name>Tesis_02Content %28Content%29</Name>
       <XnaReferenceType>Content</XnaReferenceType>
+      <Project>{27C3792A-22A4-422B-B10D-78CA4A68998C}</Project>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
