@@ -79,6 +79,7 @@
     <Compile Include="Core\ListaInteligente.cs" />
     <Compile Include="Core\Sprite.cs" />
     <Compile Include="Core\TileMap.cs" />
+    <Compile Include="Diamond.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Game1.cs" />
