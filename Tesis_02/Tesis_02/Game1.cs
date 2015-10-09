@@ -121,46 +121,14 @@ namespace Tesis_02
             }
 
 
-            
-            
-            if (keyboardStateActual.IsKeyDown(Keys.Left) && personaje.estado != Aquiles.Estado.Muriendo)
-                {
-                    personaje.direccion = Aquiles.Direccion.Izquierda;
-                    //if (soldado.estado != Aquiles.Estado.Agachado) {
-                    personaje.velocidadX = -personaje.velocidad;
-                    //}
-                    if (correr)
-                    {
-                        soldado.velocidadX -= 0.1f;
-                    }
-                }
-                if (keyboardStateActual.IsKeyDown(Keys.Right) && soldado.estado != Aquiles.Estado.Muriendo)
-                {
-                    soldado.direccion = Aquiles.Direccion.Derecha;
-                    //if (soldado.estado != Aquiles.Estado.Agachado){
-                    soldado.velocidadX = +soldado.velocidad;
-                    //}
-                    if (correr)
-                    {
-                        soldado.velocidadX += 0.1f;
-                    }
-                }
-
-                //actualizar estados de aquiles
-                if (personaje.estado != Diamond.Estado.Parado)
-                {
-                    if (soldado.velocidadX != 0)
-                    {
-                        soldado.estado = Aquiles.Estado.Caminando;
-                    }
-                }
-                if (!keyboardStateActual.IsKeyDown(Keys.Down))
-                {
-                    if (soldado.estado != Aquiles.Estado.Saltando && soldado.estado != Aquiles.Estado.Muriendo && soldado.estado != Aquiles.Estado.Caminando)
-                    {
-                        soldado.estado = Aquiles.Estado.Parado;
-                    }
-                }
+            //actualizar estados de personaje
+            if (personaje.velocidadX != 0)
+            {
+                personaje.estado = Diamond.Estado.Caminando;
+            }
+            else
+            {
+                personaje.estado = Diamond.Estado.Parado;
             }
             escenario.actualizar(gameTime.ElapsedGameTime.Milliseconds);
 
