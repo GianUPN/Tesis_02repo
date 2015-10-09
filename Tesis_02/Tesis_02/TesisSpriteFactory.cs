@@ -15,9 +15,9 @@ namespace Tesis_02
             this.game = game;
         }
 
-        public Core.Sprite obtenerSprite(String nombreSprite){
+        public Sprite obtenerSprite(String nombreSprite){
 
-            Core.Sprite objSprite = null;
+            Sprite objSprite = null;
             switch (nombreSprite)
             {
                 case "pared":
