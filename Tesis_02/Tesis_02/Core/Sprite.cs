@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
-using SuperMeatBoyPC.Core;
+using Tesis_02.Core;
 
 
-namespace SuperMeatBoyPC.Core
+namespace Tesis_02.Core
 {
     public class Sprite
     {

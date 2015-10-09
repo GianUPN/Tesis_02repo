@@ -6,7 +6,7 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace SuperMeatBoyPC.Core
+namespace Tesis_02.Core
 {
     public class TileMap
     {

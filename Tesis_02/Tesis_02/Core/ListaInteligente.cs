@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Collections;
 
-namespace SuperMeatBoyPC.Core
+namespace Tesis_02.Core
 {
     // A delegate type for hooking up change notifications.
     public delegate void ChangedEventHandler(object sender, object e);

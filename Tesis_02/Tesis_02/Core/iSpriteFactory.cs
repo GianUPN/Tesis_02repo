@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace SuperMeatBoyPC.Core
+namespace Tesis_02.Core
 {
     public interface iSpriteFactory
     {
