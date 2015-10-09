@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tesis_02", "Tesis_02\Tesis_02\Tesis_02.csproj", "{0131B1B2-79C9-4772-AF47-D7B7981C7F41}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tesis_02Content", "Tesis_02\Tesis_02Content\Tesis_02Content.contentproj", "{27C3792A-22A4-422B-B10D-78CA4A68998C}"
@@ -52,8 +54,8 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{0131B1B2-79C9-4772-AF47-D7B7981C7F41} = {7862BBFD-3D24-41C1-8AD3-78501238CB36}
 		{27C3792A-22A4-422B-B10D-78CA4A68998C} = {7862BBFD-3D24-41C1-8AD3-78501238CB36}
+		{0131B1B2-79C9-4772-AF47-D7B7981C7F41} = {7862BBFD-3D24-41C1-8AD3-78501238CB36}
 		{05EE4B0F-4F97-42D3-AA25-BC6D748D6D56} = {E53BE23F-BD1D-4626-A434-A408856053AD}
 	EndGlobalSection
 EndGlobal

@@ -92,7 +92,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Tesis_02Content\Tesis_02Content.contentproj">
-      <Name>Tesis_02Content %28Content%29</Name>
+      <Name>Tesis_02Content</Name>
       <XnaReferenceType>Content</XnaReferenceType>
       <Project>{27C3792A-22A4-422B-B10D-78CA4A68998C}</Project>
     </ProjectReference>
