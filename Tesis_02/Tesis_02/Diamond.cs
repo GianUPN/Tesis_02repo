@@ -10,9 +10,9 @@ using Tesis_02;
 using Tesis_02.Core;
 namespace Tesis_02
 {
-    public class Diamond : Core.Sprite
+    public class Diamond : Sprite
     {
-        private float fuerzaGravedad = 0.002f;
+        //private float fuerzaGravedad = 0.002f;
         public float velocidad { get; set; }
         public enum Direccion { Izquierda, Derecha, Arriba, Abajo };
         public Direccion direccion { get; set; }
@@ -84,17 +84,13 @@ namespace Tesis_02
             animCaminandoArriba.agregarFrame(caminandoArriba3, 200);
 
             base.animacion = animParado;
-            velocidad = 0.3f;
+            velocidad = 0.15f;
         }
 
         public override void actualizar(long tiempo)
         {
-            if (velocidadY > 0.01)
-            {
-                
-            }
-
-            switch (direccion)//Animacion correcta
+            //Animacion correcta
+            switch (direccion)
             {
                 case Direccion.Izquierda:
                     switch (estado)
@@ -146,11 +142,22 @@ namespace Tesis_02
             }
             base.actualizar(tiempo);
             //Gravedad
-            velocidadY += fuerzaGravedad * tiempo;
+            //velocidadY += fuerzaGravedad * tiempo;
         }
 
 
+        public override void evento_ColisionVerticalTile()
+        {
+            
+            base.evento_ColisionVerticalTile();
+        }
 
+
+        public override void evento_ColisionHorizontalTile()
+        {
+
+            base.evento_ColisionHorizontalTile();
+        }
 
     }
 }

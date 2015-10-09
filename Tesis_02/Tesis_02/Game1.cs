@@ -105,7 +105,7 @@ namespace Tesis_02
             if (keyboardStateActual.IsKeyDown(Keys.Down))
             {
                 personaje.direccion = Diamond.Direccion.Abajo;
-                personaje.velocidadY = -personaje.velocidad;
+                personaje.velocidadY = +personaje.velocidad;
             }
             if (keyboardStateActual.IsKeyDown(Keys.Left))
             {
@@ -120,12 +120,12 @@ namespace Tesis_02
             if (keyboardStateActual.IsKeyDown(Keys.Up))
             {
                 personaje.direccion = Diamond.Direccion.Arriba;
-                personaje.velocidadY = +personaje.velocidad;
+                personaje.velocidadY = -personaje.velocidad;
             }
 
 
             //actualizar estados de personaje
-            if (personaje.velocidadX != 0)
+            if (personaje.velocidadX != 0 || personaje.velocidadY != 0)
             {
                 personaje.estado = Diamond.Estado.Caminando;
             }
