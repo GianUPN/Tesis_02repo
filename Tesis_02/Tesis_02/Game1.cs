@@ -89,29 +89,45 @@ namespace Tesis_02
             
             keyboardStatePrevio = keyboardStateActual;// Almacena el estado previo en variables distintas
             keyboardStateActual = Keyboard.GetState();// Leer el estado actual del teclado y almacenarlo
+            
 
-                if (keyboardStateActual.IsKeyDown(Keys.C) && !keyboardStatePrevio.IsKeyDown(Keys.C) && soldado.estado != Aquiles.Estado.Muriendo)
-                {
-                    soldado.disparar();
-                }
-
-                bool correr = false;
-                if (keyboardStateActual.IsKeyDown(Keys.LeftControl) && soldado.estado != Aquiles.Estado.Muriendo)
-                {
+            personaje.velocidadX = 0;
+            personaje.velocidadY = 0;
+            /*
+            bool correr = false;
+            if (keyboardStateActual.IsKeyDown(Keys.LeftControl)){
                     correr = true;
-                }
+            }*/
 
-                if (keyboardStateActual.IsKeyDown(Keys.Down) && !keyboardStatePrevio.IsKeyDown(Keys.Down) && soldado.estado != Aquiles.Estado.Muriendo)
-                {
-                    soldado.agacharse();
-                }
+            if (keyboardStateActual.IsKeyDown(Keys.Down))
+            {
+                personaje.direccion = Diamond.Direccion.Abajo;
+                personaje.velocidadY = -personaje.velocidad;
+            }
+            if (keyboardStateActual.IsKeyDown(Keys.Left))
+            {
+                personaje.direccion = Diamond.Direccion.Izquierda;
+                personaje.velocidadX = -personaje.velocidad;
+            }
+            if (keyboardStateActual.IsKeyDown(Keys.Right))
+            {
+                personaje.direccion = Diamond.Direccion.Derecha;
+                personaje.velocidadX = +personaje.velocidad;
+            }
+            if (keyboardStateActual.IsKeyDown(Keys.Up))
+            {
+                personaje.direccion = Diamond.Direccion.Arriba;
+                personaje.velocidadY = +personaje.velocidad;
+            }
 
-                soldado.velocidadX = 0;
-                if (keyboardStateActual.IsKeyDown(Keys.Left) && soldado.estado != Aquiles.Estado.Muriendo)
+
+            
+            
+            if (keyboardStateActual.IsKeyDown(Keys.Left) && personaje.estado != Aquiles.Estado.Muriendo)
                 {
-                    soldado.direccion = Aquiles.Direccion.Izquierda;
+                    personaje.direccion = Aquiles.Direccion.Izquierda;
                     //if (soldado.estado != Aquiles.Estado.Agachado) {
-                    soldado.velocidadX = -soldado.velocidad;
+                    personaje.velocidadX = -personaje.velocidad;
                     //}
                     if (correr)
                     {
@@ -130,21 +146,12 @@ namespace Tesis_02
                     }
                 }
 
-                if (keyboardStateActual.IsKeyDown(Keys.Space) && !keyboardStatePrevio.IsKeyDown(Keys.Space) && soldado.estado != Aquiles.Estado.Muriendo && soldado.estado != Aquiles.Estado.Agachado)
-                {
-                    soldado.saltar();
-                }
-
                 //actualizar estados de aquiles
-                if (soldado.estado != Aquiles.Estado.Saltando && soldado.estado != Aquiles.Estado.Agachado)
+                if (personaje.estado != Diamond.Estado.Parado)
                 {
                     if (soldado.velocidadX != 0)
                     {
                         soldado.estado = Aquiles.Estado.Caminando;
-                    }
-                    else
-                    {
-                        soldado.estado = Aquiles.Estado.Parado;
                     }
                 }
                 if (!keyboardStateActual.IsKeyDown(Keys.Down))

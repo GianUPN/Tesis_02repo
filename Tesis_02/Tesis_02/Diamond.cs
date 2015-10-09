@@ -14,7 +14,7 @@ namespace Tesis_02
     {
         private float fuerzaGravedad = 0.002f;
         public float velocidad { get; set; }
-        public enum Direccion { Izquierda, Derecha };
+        public enum Direccion { Izquierda, Derecha, Arriba, Abajo };
         public Direccion direccion { get; set; }
         public enum Estado { Caminando, Parado};
         protected Game1 game { get; set; }
