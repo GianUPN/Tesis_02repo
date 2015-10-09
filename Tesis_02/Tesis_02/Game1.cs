@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
-using Tesis_02;
+using Tesis_02.Core;
 
 namespace Tesis_02
 {
@@ -19,6 +19,10 @@ namespace Tesis_02
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        TileMap escenario;
+        KeyboardState keyboardStateActual;
+        KeyboardState keyboardStatePrevio;
+        public Diamond personaje  { get; set; }
 
         public Game1()
         {
@@ -34,7 +38,18 @@ namespace Tesis_02
         /// </summary>
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
+            personaje = new Diamond(this);
+            Texture2D fondo = Content.Load<Texture2D>("Backgrounds/fondo");
+            /*escenario = new TileMap(this,"",personaje,5,13);
+            escenario.spriteFactory = new TesisSpriteFactory(this);
+            escenario.regenerarMapa();
+            escenario.HorizontalScrolling = TileMap.Scrolling.Sprite;
+            escenario.VerticalScrolling = TileMap.Scrolling.Sprite;*/
+            
+            escenario.ParallaxBackground = fondo;
+            //Configurar el fondo del escenario
+            escenario.ParallaxBackgroundHorizontalScrolling = TileMap.ParallaxBackgroundScrolling.Normal;
+            escenario.ParallaxBackgroundVerticalScrolling = TileMap.ParallaxBackgroundScrolling.Normal;
 
             base.Initialize();
         }
@@ -69,11 +84,78 @@ namespace Tesis_02
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            // Allows the game to exit
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
+            
+            keyboardStatePrevio = keyboardStateActual;// Almacena el estado previo en variables distintas
+            keyboardStateActual = Keyboard.GetState();// Leer el estado actual del teclado y almacenarlo
 
-            // TODO: Add your update logic here
+                if (keyboardStateActual.IsKeyDown(Keys.C) && !keyboardStatePrevio.IsKeyDown(Keys.C) && soldado.estado != Aquiles.Estado.Muriendo)
+                {
+                    soldado.disparar();
+                }
+
+                bool correr = false;
+                if (keyboardStateActual.IsKeyDown(Keys.LeftControl) && soldado.estado != Aquiles.Estado.Muriendo)
+                {
+                    correr = true;
+                }
+
+                if (keyboardStateActual.IsKeyDown(Keys.Down) && !keyboardStatePrevio.IsKeyDown(Keys.Down) && soldado.estado != Aquiles.Estado.Muriendo)
+                {
+                    soldado.agacharse();
+                }
+
+                soldado.velocidadX = 0;
+                if (keyboardStateActual.IsKeyDown(Keys.Left) && soldado.estado != Aquiles.Estado.Muriendo)
+                {
+                    soldado.direccion = Aquiles.Direccion.Izquierda;
+                    //if (soldado.estado != Aquiles.Estado.Agachado) {
+                    soldado.velocidadX = -soldado.velocidad;
+                    //}
+                    if (correr)
+                    {
+                        soldado.velocidadX -= 0.1f;
+                    }
+                }
+                if (keyboardStateActual.IsKeyDown(Keys.Right) && soldado.estado != Aquiles.Estado.Muriendo)
+                {
+                    soldado.direccion = Aquiles.Direccion.Derecha;
+                    //if (soldado.estado != Aquiles.Estado.Agachado){
+                    soldado.velocidadX = +soldado.velocidad;
+                    //}
+                    if (correr)
+                    {
+                        soldado.velocidadX += 0.1f;
+                    }
+                }
+
+                if (keyboardStateActual.IsKeyDown(Keys.Space) && !keyboardStatePrevio.IsKeyDown(Keys.Space) && soldado.estado != Aquiles.Estado.Muriendo && soldado.estado != Aquiles.Estado.Agachado)
+                {
+                    soldado.saltar();
+                }
+
+                //actualizar estados de aquiles
+                if (soldado.estado != Aquiles.Estado.Saltando && soldado.estado != Aquiles.Estado.Agachado)
+                {
+                    if (soldado.velocidadX != 0)
+                    {
+                        soldado.estado = Aquiles.Estado.Caminando;
+                    }
+                    else
+                    {
+                        soldado.estado = Aquiles.Estado.Parado;
+                    }
+                }
+                if (!keyboardStateActual.IsKeyDown(Keys.Down))
+                {
+                    if (soldado.estado != Aquiles.Estado.Saltando && soldado.estado != Aquiles.Estado.Muriendo && soldado.estado != Aquiles.Estado.Caminando)
+                    {
+                        soldado.estado = Aquiles.Estado.Parado;
+                    }
+                }
+            }
+            escenario.actualizar(gameTime.ElapsedGameTime.Milliseconds);
 
             base.Update(gameTime);
         }

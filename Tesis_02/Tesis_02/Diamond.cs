@@ -17,7 +17,14 @@ namespace Tesis_02
         public enum Direccion { Izquierda, Derecha };
         public Direccion direccion { get; set; }
         public enum Estado { Caminando, Parado};
+        protected Game1 game { get; set; }
 
+        public Diamond(Game1 game)
+            : base(null)
+        {
+            this.game = game;
+
+        }
 
 
 

@@ -80,10 +80,12 @@
     <Compile Include="Core\Sprite.cs" />
     <Compile Include="Core\TileMap.cs" />
     <Compile Include="Diamond.cs" />
+    <Compile Include="Pared.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="Pruebaxxx.cs" />
+    <Compile Include="TesisSpriteFactory.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Game.ico" />
