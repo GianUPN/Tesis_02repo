@@ -23,6 +23,7 @@ namespace Tesis_02
         KeyboardState keyboardStateActual;
         KeyboardState keyboardStatePrevio;
         public Diamond personaje  { get; set; }
+        public Texture2D fondo { get; set; }
 
         public Game1()
         {
@@ -40,13 +41,14 @@ namespace Tesis_02
         {
             personaje = new Diamond(this);
             Texture2D fondo = Content.Load<Texture2D>("Backgrounds/fondo");
-            /*escenario = new TileMap(this,"",personaje,5,13);
-            escenario.spriteFactory = new TesisSpriteFactory(this);
+            escenario = new TileMap(this, "Content/mapa_1-1.csv", personaje, 5, 13);
+            /*escenario.spriteFactory = new TesisSpriteFactory(this);
             escenario.regenerarMapa();
             escenario.HorizontalScrolling = TileMap.Scrolling.Sprite;
             escenario.VerticalScrolling = TileMap.Scrolling.Sprite;*/
             
             escenario.ParallaxBackground = fondo;
+
             //Configurar el fondo del escenario
             escenario.ParallaxBackgroundHorizontalScrolling = TileMap.ParallaxBackgroundScrolling.Normal;
             escenario.ParallaxBackgroundVerticalScrolling = TileMap.ParallaxBackgroundScrolling.Normal;
@@ -66,6 +68,7 @@ namespace Tesis_02
 
 
             // TODO: use this.Content to load your game content here
+            //fondo = Content.Load<Texture2D>("cuadrado");
         }
 
         /// <summary>
@@ -141,10 +144,13 @@ namespace Tesis_02
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            //GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // TODO: Add your drawing code here
-
+            spriteBatch.Begin();
+            escenario.dibujar(spriteBatch, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
+            //spriteBatch.Draw(fondo, new Vector2(0, 0), Color.White);
+            spriteBatch.End();
             base.Draw(gameTime);
         }
     }
