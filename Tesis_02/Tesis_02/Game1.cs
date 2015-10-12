@@ -102,6 +102,7 @@ namespace Tesis_02
 
             if (keyboardStateActual.IsKeyDown(Keys.Down))
             {
+              
                 personaje.direccion = Diamond.Direccion.Abajo;
                 personaje.velocidadY = +personaje.velocidad;
             }
