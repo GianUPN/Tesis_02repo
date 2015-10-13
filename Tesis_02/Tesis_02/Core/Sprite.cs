@@ -61,10 +61,12 @@ namespace Tesis_02.Core
 
         virtual public void evento_ColisionHorizontalSprite(Sprite objSprite)
         {
+
         }
 
         virtual public void evento_ColisionVerticalSprite(Sprite objSprite)
         {
+
         }
      }
 }

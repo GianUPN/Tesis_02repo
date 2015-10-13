@@ -20,9 +20,6 @@ namespace Tesis_02
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         TileMap escenario;
-        KeyboardState keyboardStateActual;
-        KeyboardState keyboardStatePrevio;
-        Keyboard1 keyboard1 = Keyboard1.Instance;
         public PersonajePrincipal personaje  { get; set; }
         //public Texture2D fondo { get; set; }
 
