@@ -8,9 +8,10 @@ using Microsoft.Xna.Framework.Audio;
 using System.Threading;
 using Tesis_02;
 using Tesis_02.Core;
+using Microsoft.Xna.Framework.Input;
 namespace Tesis_02
 {
-    public class Diamond : Sprite
+    public class PersonajePrincipal : Sprite
     {
         //private float fuerzaGravedad = 0.002f;
         public float velocidad { get; set; }
@@ -30,7 +31,7 @@ namespace Tesis_02
         private Animacion animCaminandoIzquierda;
         private Animacion animCaminandoArriba;
 
-        public Diamond(Game1 game) : base(null)
+        public PersonajePrincipal(Game1 game) : base(null)
         {
             this.game = game;
 
@@ -90,6 +91,10 @@ namespace Tesis_02
         public override void actualizar(long tiempo)
         {
             //Animacion correcta
+            this.velocidadX = 0;
+            this.velocidadY = 0;
+            actualizar_teclas();
+
             switch (direccion)
             {
                 case Direccion.Izquierda:
@@ -140,11 +145,49 @@ namespace Tesis_02
                     }
                     break;
             }
+
+           
+
             base.actualizar(tiempo);
             //Gravedad
             //velocidadY += fuerzaGravedad * tiempo;
         }
 
+        private void actualizar_teclas()
+        {
+            if (Keyboard1.Instance.getkeyboardStateActual.IsKeyDown(Keys.Down))
+            {
+
+                this.direccion = PersonajePrincipal.Direccion.Abajo;
+                this.velocidadY = +this.velocidad;
+            }
+            if (Keyboard1.Instance.getkeyboardStateActual.IsKeyDown(Keys.Left))
+            {
+                this.direccion = PersonajePrincipal.Direccion.Izquierda;
+                this.velocidadX = -this.velocidad;
+            }
+            if (Keyboard1.Instance.getkeyboardStateActual.IsKeyDown(Keys.Right))
+            {
+                this.direccion = PersonajePrincipal.Direccion.Derecha;
+                this.velocidadX = +this.velocidad;
+            }
+            if (Keyboard1.Instance.getkeyboardStateActual.IsKeyDown(Keys.Up))
+            {
+                this.direccion = PersonajePrincipal.Direccion.Arriba;
+                this.velocidadY = -this.velocidad;
+            }
+
+
+            //actualizar estados de personaje
+            if (this.velocidadX != 0 || this.velocidadY != 0)
+            {
+                this.estado = PersonajePrincipal.Estado.Caminando;
+            }
+            else
+            {
+                this.estado = PersonajePrincipal.Estado.Parado;
+            }
+        }
 
         public override void evento_ColisionVerticalTile()
         {
