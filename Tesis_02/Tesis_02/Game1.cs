@@ -41,7 +41,8 @@ namespace Tesis_02
             Texture2D fondo = Content.Load<Texture2D>("Backgrounds/fondo");
             escenario = new TileMap(this, "Content/Mapas/mapa_1-1.csv", personaje,2,10);
             escenario.spriteFactory = new TesisSpriteFactory(this);
-            escenario.regenerarMapa();
+            //escenario.regenerarMapa();
+            TileMap.Instance.regenerarMapa();
             escenario.HorizontalScrolling = TileMap.Scrolling.Sprite;
             escenario.VerticalScrolling = TileMap.Scrolling.Sprite;
             
@@ -87,7 +88,11 @@ namespace Tesis_02
             // Almacena el estado previo en variables distintas
             Keyboard1.Instance.setkeyboardStateActual(Keyboard.GetState());
             // Leer el estado actual del teclado y almacenarlo
-
+            if (Keyboard1.Instance.getkeyboardStateActual.IsKeyDown(Keys.Escape))
+            {
+                escenario = new TileMap(this, "Content/Mapas/mapa_1-1.csv", personaje, 2, 10);
+                TileMap.Instance.regenerarMapa();
+            }
                      
             escenario.actualizar(gameTime.ElapsedGameTime.Milliseconds);
 

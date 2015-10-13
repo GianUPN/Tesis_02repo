@@ -9,7 +9,23 @@ using Microsoft.Xna.Framework.Graphics;
 namespace Tesis_02.Core
 {
     public class TileMap
-    {
+    {   
+
+         private static TileMap instance;
+
+         private TileMap() { }
+
+         public static TileMap Instance
+       {
+          get 
+          {
+             if (instance == null)
+             {
+                 instance = new TileMap();
+             }
+             return instance;
+          }
+       }
         /*
          * --------------------------------------------------------------------------------------
          *  Parámetros de ejecución
