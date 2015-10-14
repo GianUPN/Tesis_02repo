@@ -31,6 +31,7 @@ namespace Tesis_02
         private Animacion animCaminandoIzquierda;
         private Animacion animCaminandoArriba;
 
+
         public PersonajePrincipal(Game1 game) : base(null)
         {
             this.game = game;
@@ -91,10 +92,11 @@ namespace Tesis_02
         public override void actualizar(long tiempo)
         {
             //Animacion correcta
-            this.velocidadX = 0;
-            this.velocidadY = 0;
-            actualizar_teclas();
-
+            //this.velocidadX = 0;
+            //this.velocidadY = 0;
+            
+            
+          
             switch (direccion)
             {
                 case Direccion.Izquierda:
@@ -145,21 +147,27 @@ namespace Tesis_02
                     }
                     break;
             }
+            //actualizar_teclas();
 
-           
+
 
             base.actualizar(tiempo);
             //Gravedad
             //velocidadY += fuerzaGravedad * tiempo;
         }
 
-        private void actualizar_teclas()
+        public void actualizar_teclas()
         {
             if (Keyboard1.Instance.getkeyboardStateActual.IsKeyDown(Keys.Down))
             {
-
+                
                 this.direccion = PersonajePrincipal.Direccion.Abajo;
                 this.velocidadY = +this.velocidad;
+            }
+            if (Keyboard1.Instance.getkeyboardStateActual.IsKeyDown(Keys.Up))
+            {
+                this.direccion = PersonajePrincipal.Direccion.Arriba;
+                this.velocidadY = -this.velocidad;
             }
             if (Keyboard1.Instance.getkeyboardStateActual.IsKeyDown(Keys.Left))
             {
@@ -171,11 +179,7 @@ namespace Tesis_02
                 this.direccion = PersonajePrincipal.Direccion.Derecha;
                 this.velocidadX = +this.velocidad;
             }
-            if (Keyboard1.Instance.getkeyboardStateActual.IsKeyDown(Keys.Up))
-            {
-                this.direccion = PersonajePrincipal.Direccion.Arriba;
-                this.velocidadY = -this.velocidad;
-            }
+           
 
 
             //actualizar estados de personaje
@@ -187,6 +191,12 @@ namespace Tesis_02
             {
                 this.estado = PersonajePrincipal.Estado.Parado;
             }
+        }
+
+        public void parar_personaje()
+        {
+            this.velocidadX = 0;
+            this.velocidadY = 0;
         }
 
         public override void evento_ColisionVerticalTile()

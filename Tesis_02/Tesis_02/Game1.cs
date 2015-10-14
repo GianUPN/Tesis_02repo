@@ -74,40 +74,34 @@ namespace Tesis_02
             // TODO: Unload any non ContentManager content here
         }
 
-        /// <summary>
-        /// Allows the game to run logic such as updating the world,
-        /// checking for collisions, gathering input, and playing audio.
-        /// </summary>
-        /// <param name="gameTime">Provides a snapshot of timing values.</param>
+        
         protected override void Update(GameTime gameTime)
         {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
-                this.Exit();
+            //if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
+               // this.Exit();
 
             Keyboard1.Instance.setkeyboardStatePrevio(Keyboard1.Instance.getkeyboardStateActual);
             // Almacena el estado previo en variables distintas
             Keyboard1.Instance.setkeyboardStateActual(Keyboard.GetState());
             // Leer el estado actual del teclado y almacenarlo
+            /*
             if (Keyboard1.Instance.getkeyboardStateActual.IsKeyDown(Keys.Escape))
             {
                 escenario = new TileMap(this, "Content/Mapas/mapa_1-1.csv", personaje, 2, 10);
+
                 TileMap.Instance.regenerarMapa();
             }
-                     
+            */
+            personaje.parar_personaje();
+            personaje.actualizar_teclas();
             escenario.actualizar(gameTime.ElapsedGameTime.Milliseconds);
 
             base.Update(gameTime);
         }
 
-        /// <summary>
-        /// This is called when the game should draw itself.
-        /// </summary>
-        /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            //GraphicsDevice.Clear(Color.CornflowerBlue);
-
-            // TODO: Add your drawing code here
+           
             spriteBatch.Begin();
             escenario.dibujar(spriteBatch, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
             spriteBatch.End();
