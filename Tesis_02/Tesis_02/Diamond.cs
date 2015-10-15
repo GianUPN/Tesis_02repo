@@ -84,7 +84,7 @@ namespace Tesis_02
             animCaminandoArriba.agregarFrame(caminandoArriba3, 200);
 
             base.animacion = animParado;
-            velocidad = 0.15f;
+            velocidad = 0.05f;
         }
 
         public override void actualizar(long tiempo)

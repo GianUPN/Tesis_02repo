@@ -88,7 +88,7 @@ namespace Tesis_02
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
             
-            keyboardStatePrevio = keyboardStateActual;// Almacena el estado previo en variables distintas
+            //keyboardStatePrevio = keyboardStateActual;// Almacena el estado previo en variables distintas
             keyboardStateActual = Keyboard.GetState();// Leer el estado actual del teclado y almacenarlo
             
 
