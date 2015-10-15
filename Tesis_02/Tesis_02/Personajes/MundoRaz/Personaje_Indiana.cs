@@ -6,13 +6,15 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Audio;
 using System.Threading;
+using Tesis_02;
 using Tesis_02.Core;
 using Microsoft.Xna.Framework.Input;
-namespace Tesis_02
+
+namespace Tesis_02.Personajes.MundoRaz
 {
-    public class PersonajePrincipal : Sprite
+    class Personaje_Indiana:Sprite
     {
-        //private float fuerzaGravedad = 0.002f;
+    //private float fuerzaGravedad = 0.002f;
         public float velocidad { get; set; }
         public enum Direccion { Izquierda, Derecha, Arriba, Abajo };
         public Direccion direccion { get; set; }
@@ -31,7 +33,8 @@ namespace Tesis_02
         private Animacion animCaminandoArriba;
 
 
-        public PersonajePrincipal(Game1 game) : base(null)
+        public Personaje_Indiana(Game1 game)
+            : base(null)
         {
             this.game = game;
 
@@ -86,16 +89,17 @@ namespace Tesis_02
 
             base.animacion = animParado;
             velocidad = 0.15f;
+            this.velocidadY = 0.03f;
         }
 
         public override void actualizar(long tiempo)
         {
             //Animacion correcta
-            //this.velocidadX = 0;
-            //this.velocidadY = 0;
+            this.velocidadX = 0;
             
-            
-          
+
+
+            actualizar_movimiento();
             switch (direccion)
             {
                 case Direccion.Izquierda:
@@ -155,40 +159,25 @@ namespace Tesis_02
             //velocidadY += fuerzaGravedad * tiempo;
         }
 
-        public void actualizar_teclas()
-        {   
-            if (Keyboard1.Instance.getkeyboardStateActual.IsKeyDown(Keys.Down))
+        public void actualizar_movimiento()
+        {
+            if (velocidadY > 0)
             {
-                
-                this.direccion = PersonajePrincipal.Direccion.Abajo;
-                this.velocidadY = +this.velocidad;
+                this.direccion = Direccion.Abajo; 
             }
-            if (Keyboard1.Instance.getkeyboardStateActual.IsKeyDown(Keys.Up))
+            if (velocidadY < 0)
             {
-                this.direccion = PersonajePrincipal.Direccion.Arriba;
-                this.velocidadY = -this.velocidad;
-            }
-            if (Keyboard1.Instance.getkeyboardStateActual.IsKeyDown(Keys.Left))
-            {
-                this.direccion = PersonajePrincipal.Direccion.Izquierda;
-                this.velocidadX = -this.velocidad;
-            }
-            if (Keyboard1.Instance.getkeyboardStateActual.IsKeyDown(Keys.Right))
-            {
-                this.direccion = PersonajePrincipal.Direccion.Derecha;
-                this.velocidadX = +this.velocidad;
+                this.direccion = Direccion.Arriba;
             }
            
-
-
             //actualizar estados de personaje
             if (this.velocidadX != 0 || this.velocidadY != 0)
             {
-                this.estado = PersonajePrincipal.Estado.Caminando;
+                this.estado = Personaje_Indiana.Estado.Caminando;
             }
             else
             {
-                this.estado = PersonajePrincipal.Estado.Parado;
+                this.estado = Personaje_Indiana.Estado.Parado;
             }
         }
 
@@ -200,19 +189,20 @@ namespace Tesis_02
 
         public override void evento_ColisionVerticalTile()
         {
-            
-            base.evento_ColisionVerticalTile();
+            this.velocidadY = -this.velocidadY;
+           // base.evento_ColisionVerticalTile();
         }
 
 
         public override void evento_ColisionHorizontalTile()
         {
-
-            base.evento_ColisionHorizontalTile();
+           
+           // base.evento_ColisionHorizontalTile();
         }
+
         public override void evento_ColisionHorizontalSprite(Sprite objSprite)
         {
-            //base.evento_ColisionHorizontalSprite(objSprite);
+           // base.evento_ColisionHorizontalSprite(objSprite);
         }
         public override void evento_ColisionVerticalSprite(Sprite objSprite)
         {

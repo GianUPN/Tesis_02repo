@@ -39,16 +39,17 @@ namespace Tesis_02
         {
             personaje = new PersonajePrincipal(this);
             Texture2D fondo = Content.Load<Texture2D>("Backgrounds/fondo");
-            escenario = new TileMap(this, "Content/Mapas/mapa_1-1.csv", personaje,2,10);
-            escenario.spriteFactory = new TesisSpriteFactory(this);
+            TileMap.Instance(this, "Content/Mapas/mapa_1-1.csv", personaje,2,20);
+            TileMap.GetInstance.spriteFactory = new RazonamientoSpriteFactory(this);
+            //.spriteFactory = new RazonamientoSpriteFactory(this);
             //escenario.regenerarMapa();
-            TileMap.Instance.regenerarMapa();
-            escenario.HorizontalScrolling = TileMap.Scrolling.Sprite;
-            escenario.VerticalScrolling = TileMap.Scrolling.Sprite;
-            
-            escenario.ParallaxBackground = fondo;
-
            
+            TileMap.GetInstance.HorizontalScrolling = TileMap.Scrolling.Sprite;
+            TileMap.GetInstance.VerticalScrolling = TileMap.Scrolling.Sprite;
+
+            TileMap.GetInstance.ParallaxBackground = fondo;
+
+            TileMap.GetInstance.regenerarMapa();
             base.Initialize();
         }
 
@@ -94,7 +95,7 @@ namespace Tesis_02
             */
             personaje.parar_personaje();
             personaje.actualizar_teclas();
-            escenario.actualizar(gameTime.ElapsedGameTime.Milliseconds);
+            TileMap.GetInstance.actualizar((long)gameTime.ElapsedGameTime.TotalMilliseconds);
 
             base.Update(gameTime);
         }
@@ -103,7 +104,7 @@ namespace Tesis_02
         {
            
             spriteBatch.Begin();
-            escenario.dibujar(spriteBatch, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
+            TileMap.GetInstance.dibujar(spriteBatch, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
             spriteBatch.End();
             base.Draw(gameTime);
         }
