@@ -22,7 +22,7 @@ namespace Tesis_02.Personajes.MundoRaz
         public Estado estado { get; set; }
 
         protected Game1 game { get; set; }
-
+        private int band = 0;
         private Animacion animParado;
         private Animacion animParadoDerecha;
         private Animacion animParadoIzquierda;
@@ -202,11 +202,22 @@ namespace Tesis_02.Personajes.MundoRaz
 
         public override void evento_ColisionHorizontalSprite(Sprite objSprite)
         {
-           // base.evento_ColisionHorizontalSprite(objSprite);
+
+         
+
         }
         public override void evento_ColisionVerticalSprite(Sprite objSprite)
         {
-            //base.evento_ColisionVerticalSprite(objSprite);
+            if (objSprite is PersonajePrincipal && Keyboard1.Instance.getkeyboardStateActual.IsKeyDown(Keys.Space) && band==0)
+            {
+                band = 1;
+                PersonajePrincipal personaje = (PersonajePrincipal)objSprite;
+                // TileMap.GetInstance.sprites.Remove(this);
+                Puzle puzle = new Puzle(game, "puzzle01");
+                puzle.x = this.x+40;
+                puzle.y = this.y-50;
+                TileMap.GetInstance.sprites.Add(puzle);
+            }
         }
 
     }

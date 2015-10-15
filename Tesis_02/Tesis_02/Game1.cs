@@ -19,7 +19,7 @@ namespace Tesis_02
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        TileMap escenario;
+        //TileMap escenario;
         public PersonajePrincipal personaje  { get; set; }
         //public Texture2D fondo { get; set; }
 
@@ -37,6 +37,7 @@ namespace Tesis_02
         /// </summary>
         protected override void Initialize()
         {
+            this.IsMouseVisible = true;
             personaje = new PersonajePrincipal(this);
             Texture2D fondo = Content.Load<Texture2D>("Backgrounds/fondo");
             TileMap.Instance(this, "Content/Mapas/mapa_1-1.csv", personaje,2,20);

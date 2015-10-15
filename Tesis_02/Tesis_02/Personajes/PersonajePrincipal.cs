@@ -30,11 +30,14 @@ namespace Tesis_02
         private Animacion animCaminandoIzquierda;
         private Animacion animCaminandoArriba;
 
+        public int pausa{get;set;}
+        
+
 
         public PersonajePrincipal(Game1 game) : base(null)
         {
             this.game = game;
-
+            pausa = 0;
             Texture2D parado = game.Content.Load<Texture2D>("Player/parado"); //Parado
             animParado = new Animacion();
             animParado.agregarFrame(parado,200);
