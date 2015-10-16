@@ -80,6 +80,7 @@
     <Compile Include="Core\Sprite.cs" />
     <Compile Include="Core\TileMap.cs" />
     <Compile Include="Keyboard1.cs" />
+    <Compile Include="Objetos\Portal01.cs" />
     <Compile Include="Objetos\Puerta.cs" />
     <Compile Include="Personajes\MundoRaz\Personaje_Indiana.cs" />
     <Compile Include="Personajes\PersonajePrincipal.cs" />
@@ -87,7 +88,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Game1.cs" />
+    <Compile Include="Puzle.cs" />
     <Compile Include="RazonamientoSpriteFactory.cs" />
+    <Compile Include="Raz_mapa1-2_SpriteFactory.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Game.ico" />
@@ -124,7 +127,9 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Personajes\MundoArit\" />
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\Microsoft.Xna.GameStudio.targets" />
   <!--
