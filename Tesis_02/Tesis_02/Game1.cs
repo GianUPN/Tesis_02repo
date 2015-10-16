@@ -20,9 +20,7 @@ namespace Tesis_02
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         TileMap escenario;
-        KeyboardState keyboardStateActual;
-        KeyboardState keyboardStatePrevio;
-        public Diamond personaje  { get; set; }
+        public PersonajePrincipal personaje  { get; set; }
         //public Texture2D fondo { get; set; }
 
         public Game1()
@@ -39,20 +37,19 @@ namespace Tesis_02
         /// </summary>
         protected override void Initialize()
         {
-            personaje = new Diamond(this);
+            personaje = new PersonajePrincipal(this);
             Texture2D fondo = Content.Load<Texture2D>("Backgrounds/fondo");
-            escenario = new TileMap(this, "Content/mapa_1-1.csv", personaje,2,10);
-            escenario.spriteFactory = new TesisSpriteFactory(this);
-            escenario.regenerarMapa();
-            escenario.HorizontalScrolling = TileMap.Scrolling.Sprite;
-            escenario.VerticalScrolling = TileMap.Scrolling.Sprite;
-            
-            escenario.ParallaxBackground = fondo;
+            TileMap.Instance(this, "Content/Mapas/mapa_1-1.csv", personaje,2,20);
+            TileMap.GetInstance.spriteFactory = new RazonamientoSpriteFactory(this);
+            //.spriteFactory = new RazonamientoSpriteFactory(this);
+            //escenario.regenerarMapa();
+           
+            TileMap.GetInstance.HorizontalScrolling = TileMap.Scrolling.Sprite;
+            TileMap.GetInstance.VerticalScrolling = TileMap.Scrolling.Sprite;
 
-            //Configurar el fondo del escenario
-            //escenario.ParallaxBackgroundHorizontalScrolling = TileMap.ParallaxBackgroundScrolling.Normal;
-            //escenario.ParallaxBackgroundVerticalScrolling = TileMap.ParallaxBackgroundScrolling.Normal;
+            TileMap.GetInstance.ParallaxBackground = fondo;
 
+            TileMap.GetInstance.regenerarMapa();
             base.Initialize();
         }
 
@@ -78,75 +75,36 @@ namespace Tesis_02
             // TODO: Unload any non ContentManager content here
         }
 
-        /// <summary>
-        /// Allows the game to run logic such as updating the world,
-        /// checking for collisions, gathering input, and playing audio.
-        /// </summary>
-        /// <param name="gameTime">Provides a snapshot of timing values.</param>
+        
         protected override void Update(GameTime gameTime)
         {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
-                this.Exit();
-            
-            //keyboardStatePrevio = keyboardStateActual;// Almacena el estado previo en variables distintas
-            keyboardStateActual = Keyboard.GetState();// Leer el estado actual del teclado y almacenarlo
-            
+            //if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
+               // this.Exit();
 
-            personaje.velocidadX = 0;
-            personaje.velocidadY = 0;
+            Keyboard1.Instance.setkeyboardStatePrevio(Keyboard1.Instance.getkeyboardStateActual);
+            // Almacena el estado previo en variables distintas
+            Keyboard1.Instance.setkeyboardStateActual(Keyboard.GetState());
+            // Leer el estado actual del teclado y almacenarlo
             /*
-            bool correr = false;
-            if (keyboardStateActual.IsKeyDown(Keys.LeftControl)){
-                    correr = true;
-            }*/
+            if (Keyboard1.Instance.getkeyboardStateActual.IsKeyDown(Keys.Escape))
+            {
+                escenario = new TileMap(this, "Content/Mapas/mapa_1-1.csv", personaje, 2, 10);
 
-            if (keyboardStateActual.IsKeyDown(Keys.Down))
-            {
-                personaje.direccion = Diamond.Direccion.Abajo;
-                personaje.velocidadY = +personaje.velocidad;
+                TileMap.Instance.regenerarMapa();
             }
-            if (keyboardStateActual.IsKeyDown(Keys.Left))
-            {
-                personaje.direccion = Diamond.Direccion.Izquierda;
-                personaje.velocidadX = -personaje.velocidad;
-            }
-            if (keyboardStateActual.IsKeyDown(Keys.Right))
-            {
-                personaje.direccion = Diamond.Direccion.Derecha;
-                personaje.velocidadX = +personaje.velocidad;
-            }
-            if (keyboardStateActual.IsKeyDown(Keys.Up))
-            {
-                personaje.direccion = Diamond.Direccion.Arriba;
-                personaje.velocidadY = -personaje.velocidad;
-            }
-
-
-            //actualizar estados de personaje
-            if (personaje.velocidadX != 0 || personaje.velocidadY != 0)
-            {
-                personaje.estado = Diamond.Estado.Caminando;
-            }
-            else
-            {
-                personaje.estado = Diamond.Estado.Parado;
-            }
-            escenario.actualizar(gameTime.ElapsedGameTime.Milliseconds);
+            */
+            personaje.parar_personaje();
+            personaje.actualizar_teclas();
+            TileMap.GetInstance.actualizar((long)gameTime.ElapsedGameTime.TotalMilliseconds);
 
             base.Update(gameTime);
         }
 
-        /// <summary>
-        /// This is called when the game should draw itself.
-        /// </summary>
-        /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            //GraphicsDevice.Clear(Color.CornflowerBlue);
-
-            // TODO: Add your drawing code here
+           
             spriteBatch.Begin();
-            escenario.dibujar(spriteBatch, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
+            TileMap.GetInstance.dibujar(spriteBatch, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
             spriteBatch.End();
             base.Draw(gameTime);
         }

@@ -6,10 +6,17 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
+
 namespace Tesis_02.Core
 {
     public class TileMap
     {
+
+        private static TileMap instance = null;
+
+         private TileMap() { }
+
+      
         /*
          * --------------------------------------------------------------------------------------
          *  Parámetros de ejecución
@@ -43,18 +50,53 @@ namespace Tesis_02.Core
         public int OffsetX { get; set; }
         public int OffsetY { get; set; }
         
-        private String mapName;
+        public String mapName{get;set;}
         private Game game;
 
         public iSpriteFactory spriteFactory { get; set; }
 
         public Sprite spriteScrolling {get; set;}
-        private int posSpriteScrollingTileX;
-        private int posSpriteScrollingTileY;
+        public int posSpriteScrollingTileX { get; set; }
+        public int posSpriteScrollingTileY { get; set; }
 
         private Point pointCache = new Point();
         public int ancho {get; private set;}
         public int alto {get; private set;}
+
+        public static TileMap GetInstance
+        {
+           get{
+                if (instance == null)
+                {
+                    instance = new TileMap(); 
+
+                }
+                return instance;
+            }
+        }
+       
+        public static TileMap Instance(Game game, String mapName, Sprite personajePrincipal, int posPersonajeTileX, int posPersonajeTileY)
+        {
+
+            if (instance == null)
+            {
+                instance = new TileMap(game, mapName,  personajePrincipal,  posPersonajeTileX,  posPersonajeTileY);
+
+            }
+            return instance;
+
+        }
+        public static TileMap InstanceTileMap(Game game, String mapName, Texture2D parallaxBackground, Sprite spriteScrolling, int posPersonajeTileX, int posPersonajeTileY)
+        {
+
+            if (instance == null)
+            {
+                instance = new TileMap( game,  mapName,  parallaxBackground,  spriteScrolling,  posPersonajeTileX,  posPersonajeTileY);
+
+            }
+            return instance;
+
+        }
 
         public TileMap(Game game, String mapName)
         {

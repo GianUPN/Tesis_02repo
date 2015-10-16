@@ -59,12 +59,34 @@ namespace Tesis_02.Core
             velocidadY = 0f;
         }
 
-        virtual public void evento_ColisionHorizontalSprite(Sprite objSprite)
+        virtual public void evento_ColisionHorizontalSprite(Sprite objSprite)//En prueba
         {
+            int medio = (int)this.x + (int)this.animacion.obtenerImagen().Width/2;
+            int posobj = (int) objSprite.x + (int) objSprite.animacion.obtenerImagen().Width;
+            if (objSprite.velocidadX > 0 &&  posobj<medio)
+            {
+                objSprite.velocidadX = 0f;
+            }
+            if (objSprite.velocidadX < 0 && medio < objSprite.x)
+            {
+                objSprite.velocidadX = 0f;
+            }
+
+
         }
 
-        virtual public void evento_ColisionVerticalSprite(Sprite objSprite)
+        virtual public void evento_ColisionVerticalSprite(Sprite objSprite)//En prueba
         {
+            int medio = (int)this.y + (int)this.animacion.obtenerImagen().Height / 2;
+            int posobj = (int)objSprite.y + (int)objSprite.animacion.obtenerImagen().Height;
+            if (objSprite.velocidadY < 0 && posobj < medio)
+            {
+                objSprite.velocidadY = 0f;
+            }
+            if (objSprite.velocidadY > 0 && medio > objSprite.y)
+            {
+                objSprite.velocidadY = 0f;
+            }
         }
      }
 }

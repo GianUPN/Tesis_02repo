@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
-namespace Tesis_02
+namespace Modelo
 {
-    class Pruebaxxx
+    public class Class1
     {
-        //
     }
 }
